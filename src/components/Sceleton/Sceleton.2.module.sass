@@ -1,0 +1,110 @@
+.container
+//animation: pulse 2s infinite
+
+@keyframes pulse
+  0%
+    transform: scale(1)
+  20%
+    transform: scale(.99)
+  40%
+    transform: scale(.98)
+  60%
+    transform: scale(.98)
+  80%
+    transform: scale(.99)
+  100%
+    transform: scale(1)
+
+.card
+  -webkit-touch-callout: none
+  -webkit-user-select: none
+  -khtml-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
+  color: #cfcfcf
+  filter: blur(5px)
+  background-color: #e8e8e8
+  width: 300px
+  height: 350px
+  display: flex
+  align-items: center
+  justify-content: space-between
+  flex-direction: column
+  margin-bottom: 50px
+  box-sizing: border-box
+  border: 2px solid black
+  box-shadow: 0 0 10px rgba(0,0,0,0.5)
+  position: relative
+  //animation: pulse 2s infinite
+
+
+
+  .header
+    display: flex
+    align-items: center
+    justify-content: space-around
+    flex-direction: column
+    width: 100%
+    min-height: 50%
+    padding: 0 30px
+    box-sizing: border-box
+
+    .header_top
+      display: flex
+      justify-content: space-around
+      align-items: center
+      flex-direction: row
+      width: 90%
+      height: 96px
+
+    .header_bot
+      display: flex
+      justify-content: space-around
+      align-items: center
+      flex-direction: row
+      width: 90%
+
+      .stats
+        line-height: 25px
+        font-size: 25px
+
+  .image
+    width: 50px
+    height: 50px
+    background-color: #dedede
+    box-shadow: 0 0 20px rgba(0,0,0,0.3)
+    border-radius: 50%
+
+
+
+  .name
+    text-align: center
+    font-weight: 700
+    white-space: nowrap
+
+  .table
+    width: 100%
+    height: 50%
+    background-color: white
+    border-collapse: collapse
+    .row
+      border-bottom: 1px solid black
+      border-top: 1px solid black
+      font-weight: 400
+      .cell
+        font-weight: 400
+        &:first-child
+          width: 30%
+          border-right: 1px solid black
+          font-weight: 700
+.front
+  backface-visibility: hidden
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+
+.front
+  z-index: 2
