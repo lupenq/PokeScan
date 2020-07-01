@@ -18,8 +18,9 @@
   border: 2px solid black
   box-shadow: 0 0 10px rgba(0,0,0,0.5)
   //q
-  transition: .6s
+  transition: 1s
   transform-style: preserve-3d
+  -webkit-transform-style: preserve-3d
   position: relative
 
   &:hover
@@ -57,6 +58,7 @@
 
   .image
     width: 130px
+    height: 130px
 
 
   .name
@@ -100,6 +102,7 @@
 
 .back
   transform: rotateY(-180deg)
+  -webkit-filter: opacity(1)
   .header
     max-height: 50%
   .image
