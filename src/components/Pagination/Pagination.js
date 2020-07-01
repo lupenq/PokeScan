@@ -6,25 +6,20 @@ import LeftCircleOutlined from '@ant-design/icons/lib/icons/LeftCircleOutlined'
 import RightCircleOutlined from '@ant-design/icons/lib/icons/RightCircleOutlined'
 
 export const Pagination = observer(() => {
-  const store = useDataStore();
+  const store = useDataStore()
   const {
-    fetchPokemonsCount,
     fetchPokemonsList,
-    pokemonsList,
-    pokemonsCount,
-    pokemonsData,
     nextUrl,
     prevUrl,
-    perTitle,
     loading
-  } = store;
+  } = store
 
   return (
     <div className={styles.container}>
       <LeftCircleOutlined
         component='button'
         style={{
-          pointerEvents: loading || !prevUrl && 'none',
+          pointerEvents: loading || !prevUrl ? 'none' : null,
           opacity: !prevUrl && 0.2
         }}
         className={styles.button}

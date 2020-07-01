@@ -1,31 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 import styles from './App.module.sass'
-import { useDataStore } from '../../context';
+import { useDataStore } from '../../context'
 import PokeCard from '../PokeCard/PokeCard'
 import { observer } from 'mobx-react-lite'
-import { createCardBgColor, getAbilitiesName, getFormLevel, getMainStats, getTypesName } from '../../utils'
-import { toJS } from 'mobx'
+import {
+  capitalizeFirstLetter,
+  createCardBgColor,
+  getAbilitiesName,
+  getFormLevel,
+  getMainStats,
+  getTypesName
+} from '../../utils'
 import { Header } from '../Header/Header'
 import { Loader } from '../Loader/Loader'
-import { Sceleton } from '../Sceleton/Skeleton'
 
 export const App = observer(() => {
-  const store = useDataStore();
+  const store = useDataStore()
   const {
-    fetchPokemonsCount,
     fetchPokemonsList,
-    pokemonsList,
-    pokemonsCount,
     pokemonsData,
     loading
-  } = store;
+  } = store
 
   const [actualData, setActualData] = useState(pokemonsData)
 
   useEffect(() => {
     fetchPokemonsList()
+  }, [fetchPokemonsList])
+
+  useEffect(() => {
     setActualData(pokemonsData)
-  }, [])
+  }, [pokemonsData])
 
   useEffect(() => {
     setActualData(pokemonsData)
@@ -45,20 +50,20 @@ export const App = observer(() => {
         {!loading ? actualData.map(i => {
           return <PokeCard
             key={i.id}
-            name={i.name}
-            imageFront={i.sprites['front_default']}
-            imageBack={i.sprites['back_default']}
+            name={capitalizeFirstLetter(i.name)}
+            imageFront={i.sprites.front_default}
+            imageBack={i.sprites.back_default}
             height={i.height}
             weight={i.weight}
             abilities={getAbilitiesName(i.abilities)}
             types={getTypesName(i.types)}
             bgColor={createCardBgColor(i.types)}
             stats={getMainStats(i.stats)}
-            baseExperience={i['base_experience']}
+            baseExperience={i.base_experience}
             formLevel={getFormLevel(i.forms)}
           />
-        }) : <Loader count={actualData.length} />}
+        }) : <Loader count={20}/>}
       </div>
     </>
   )
-});
+})

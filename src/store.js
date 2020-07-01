@@ -1,6 +1,6 @@
 import { fetchPokemonData, fetchPokemonsList } from './api'
 
-export function createStore() {
+export function createStore () {
   return {
     pokemonsList: [],
     pokemonsData: [],
@@ -9,7 +9,7 @@ export function createStore() {
     prevUrl: '',
     nextUrl: '',
     loading: false,
-    async fetchPokemonsList(url) {
+    async fetchPokemonsList (url) {
       this.loading = true
       if (url) {
         this.pokemonsList = await fetchPokemonsList(url).then(r => {
@@ -36,16 +36,13 @@ export function createStore() {
       this.pokemonsData = arr
       this.loading = false
     },
-    search(value) {
+    search (value) {
       this.pokemonsData = this.pokemonsData.filter(a => {
         return a.name.match(value)
       })
     },
-    setShowPerTitle(value) {
+    setShowPerTitle (value) {
       this.perTitle = value
     }
-    // async fetchPokemonsCount() {
-    //   this.pokemonsCount = await fetchPokemonsList().then(r => r.count)
-    // },
-  };
+  }
 }
