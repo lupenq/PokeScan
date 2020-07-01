@@ -2,8 +2,7 @@ import React from 'react'
 import styles from './Pagination.module.sass'
 import { observer } from 'mobx-react-lite'
 import { useDataStore } from '../../context'
-import LeftCircleOutlined from '@ant-design/icons/lib/icons/LeftCircleOutlined'
-import RightCircleOutlined from '@ant-design/icons/lib/icons/RightCircleOutlined'
+import { LeftCircleOutlined, RightCircleOutlined } from '@ant-design/icons'
 
 export const Pagination = observer(() => {
   const store = useDataStore()
