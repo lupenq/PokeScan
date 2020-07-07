@@ -25,10 +25,14 @@ export const Pagination = observer(() => {
     setPageValue(actualPage)
   }, [actualPage])
 
+  const getMaxPage = () => {
+    return Math.ceil(pokemonsCount / perPage)
+  }
+
   const changeInputHandler = (e) => {
     if (e.target.value === '0') {
       setPageValue(1)
-    } else if (e.target.value > Math.ceil(pokemonsCount / perPage)) {
+    } else if (e.target.value > getMaxPage()) {
       setPageValue(Math.ceil(pokemonsCount / perPage))
     } else {
       setPageValue(+e.target.value)
@@ -39,7 +43,7 @@ export const Pagination = observer(() => {
     if (e.target.value === '0' && e.key === 'Enter') {
       setPageValue(1)
       setActualPage(1)
-    } else if (e.target.value > Math.ceil(pokemonsCount / perPage) && e.key === 'Enter') {
+    } else if (e.target.value > getMaxPage() && e.key === 'Enter') {
       setPageValue(Math.ceil(pokemonsCount / perPage))
       setActualPage(Math.ceil(pokemonsCount / perPage))
     } else {
@@ -50,8 +54,8 @@ export const Pagination = observer(() => {
     if (e.target.value === '0') {
       setPageValue(1)
       setActualPage(pageValue)
-    } else if (e.target.value > Math.ceil(pokemonsCount / perPage)) {
-      setPageValue(Math.ceil(pokemonsCount / perPage))
+    } else if (e.target.value > getMaxPage()) {
+      setPageValue(getMaxPage())
     } else {
       setActualPage(pageValue)
     }
@@ -63,8 +67,8 @@ export const Pagination = observer(() => {
       <LeftCircleOutlined
         component='button'
         style={{
-          pointerEvents: loading || pagStart === 0 ? 'none' : null,
-          opacity: pagStart === 0 && 0.2
+          pointerEvents: loading || actualPage === 1 ? 'none' : null,
+          opacity: actualPage === 1 && 0.2
         }}
         className={styles.button}
         onClick={() => {
@@ -90,8 +94,8 @@ export const Pagination = observer(() => {
       </p>
       <RightCircleOutlined
         style={{
-          pointerEvents: loading || pagEnd >= pokemonsCount ? 'none' : null,
-          opacity: pagEnd >= pokemonsCount && 0.2
+          pointerEvents: loading || actualPage >= getMaxPage() ? 'none' : null,
+          opacity: actualPage >= getMaxPage() && 0.2
         }}
         component='button'
         className={styles.button}
