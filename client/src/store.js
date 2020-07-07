@@ -1,48 +1,58 @@
-import { fetchPokemonData, fetchPokemonsList } from './api'
+import { fetchPokemonsCount, fetchPokemonsList } from './api'
 
 export function createStore () {
   return {
     pokemonsList: [],
-    pokemonsData: [],
-    pokemonsCount: 0,
-    perTitle: 20,
-    prevUrl: '',
-    nextUrl: '',
+    perPage: 20,
+    prevPage: 0,
+    pagStart: 0,
+    pagEnd: 20,
+    actualPage: 1,
     loading: false,
-    async fetchPokemonsList (url) {
+    pokemonsCount: 0,
+    searchValue: '',
+    async fetchPokemons () {
       this.loading = true
-      if (url) {
-        this.pokemonsList = await fetchPokemonsList(url).then(r => {
-          this.prevUrl = r.previous
-          this.nextUrl = r.next
-          this.pokemonsCount = r.count
-          return r.results
-        })
-      } else {
-        this.pokemonsList = await fetchPokemonsList(null, this.perTitle).then(r => {
-          this.prevUrl = r.previous
-          this.nextUrl = r.next
-          this.pokemonsCount = r.count
-          return r.results
-        })
-      }
-      const arr = []
-      for (const i of this.pokemonsList) {
-        await fetchPokemonData(i.url).then(r => {
-          arr.push(r.data)
-        })
-      }
 
-      this.pokemonsData = arr
-      this.loading = false
-    },
-    search (value) {
-      this.pokemonsData = this.pokemonsData.filter(a => {
-        return a.name.match(value)
+      this.pokemonsList = await fetchPokemonsList().then((res) => {
+        this.loading = false
+        return res.data
       })
     },
-    setShowPerTitle (value) {
-      this.perTitle = value
+    setPokemnsCount (value) {
+      this.pokemonsCount = value
+    },
+    setActualPage (value) {
+      this.actualPage = value
+      this.pagStart = 0
+      this.pagEnd = 20
+    },
+    setPerPage (value) {
+      this.setActualPage(1)
+      this.perPage = +value
+    },
+    pagLeft () {
+      this.pagStart = this.pagStart - this.perPage
+      this.pagEnd = this.pagEnd - this.perPage
+      this.actualPage--
+    },
+    pagRight () {
+      this.pagStart = this.pagStart + this.perPage
+      this.pagEnd = this.pagEnd + this.perPage
+      this.actualPage++
+    },
+    async getCount () {
+      this.pokemonsCount = await fetchPokemonsCount().then(res => res.data)
+    },
+    searchByName (value) {
+      this.setActualPage(1)
+      return value.filter(a => {
+        return a.name.match(this.searchValue)
+      })
+    },
+    setSearchValue (value) {
+      this.setActualPage(1)
+      this.searchValue = value
     }
   }
 }

@@ -7,7 +7,7 @@ const StoreContext = React.createContext(null)
 export const DataStoreProvider = ({ children }) => {
   const store = useLocalStore(createStore)
 
-  return <StoreContext.Provider value={store}>{children}. </StoreContext.Provider>
+  return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>
 }
 
 export const useDataStore = () => {

@@ -1,30 +1,30 @@
 import axios from 'axios'
 
-const url = 'https://pokeapi.co/api/v2'
+const url = 'http://pokescan.ru'
 
-export const fetchPokemonsList = async (pagUrl, limit = 20, offset = 0) => {
+export const fetchPokemonsList = async () => {
   try {
-    if (pagUrl) {
-      const { data: { count, next, previous, results } } = await axios.get(
-        `${pagUrl}`
-      )
+    const data = await axios.get(`${url}/api/pokemons`)
 
-      return { count, next, previous, results }
-    } else {
-      const { data: { count, next, previous, results } } = await axios.get(
-        `${url}/pokemon?offset=${offset}&limit=${limit}`
-      )
-
-      return { count, next, previous, results }
-    }
+    return data
   } catch (e) {
     console.log(e)
   }
 }
 
-export const fetchPokemonData = async (pokemon) => {
+export const fetchPokemon = async (id) => {
   try {
-    const data = await axios.get(`${pokemon}`)
+    const data = await axios.get(`${url}/api/pokemons/${id}`)
+
+    return data
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+export const fetchPokemonsCount = async () => {
+  try {
+    const data = await axios.get(`${url}/api/pokemons/count`)
 
     return data
   } catch (e) {

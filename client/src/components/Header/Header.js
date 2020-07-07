@@ -8,7 +8,7 @@ import { Logo } from '../Logo/Logo'
 export const Header = observer(({ search }) => {
   return (
     <div className={styles.header}>
-      <Search searchMethod={search}/>
+      <Search/>
       <Logo/>
       <Pagination/>
     </div>
