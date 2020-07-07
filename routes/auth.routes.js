@@ -6,7 +6,6 @@ const User = require('../models/User')
 const router = Router()
 require('dotenv').config()
 
-
 // /api/auth/register
 router.post(
   '/register',
@@ -40,7 +39,6 @@ router.post(
       await user.save()
 
       res.status(201).json({ message: 'Пользователь создан' })
-
     } catch (e) {
       res.status(500).json({ message: e.message })
     }
@@ -85,11 +83,9 @@ router.post(
       )
 
       res.json({ token, userId: user.id })
-
     } catch (e) {
       res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
     }
   })
-
 
 module.exports = router

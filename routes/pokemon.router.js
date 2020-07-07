@@ -2,7 +2,6 @@ const { Router } = require('express')
 const Pokemon = require('../models/Pokemon')
 const router = Router()
 
-
 router.get('/pokemons', async (req, res) => {
   try {
     const pokemons = await Pokemon.find()

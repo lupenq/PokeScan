@@ -32,7 +32,7 @@ if (process.env.NODE_ENV === 'production') {
 
 const PORT = process.env.PORT || 5001
 
-async function start() {
+async function start () {
   try {
     await mongoose.connect(process.env.MONGO_URL, {
       useNewUrlParser: true,
@@ -47,4 +47,3 @@ async function start() {
 }
 
 start()
-
