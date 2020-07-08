@@ -15,8 +15,6 @@ export const Pagination = observer(() => {
     pokemonsCount,
     pagLeft,
     pagRight,
-    pagStart,
-    pagEnd,
     actualPage,
     setActualPage
   } = store
@@ -33,7 +31,7 @@ export const Pagination = observer(() => {
     if (e.target.value === '0') {
       setPageValue(1)
     } else if (e.target.value > getMaxPage()) {
-      setPageValue(Math.ceil(pokemonsCount / perPage))
+      setPageValue(getMaxPage())
     } else {
       setPageValue(+e.target.value)
     }
@@ -44,8 +42,8 @@ export const Pagination = observer(() => {
       setPageValue(1)
       setActualPage(1)
     } else if (e.target.value > getMaxPage() && e.key === 'Enter') {
-      setPageValue(Math.ceil(pokemonsCount / perPage))
-      setActualPage(Math.ceil(pokemonsCount / perPage))
+      setPageValue(getMaxPage())
+      setActualPage(getMaxPage())
     } else {
       e.key === 'Enter' && setActualPage(pageValue)
     }
@@ -90,7 +88,7 @@ export const Pagination = observer(() => {
       <p
         className={styles.numbers}
       >
-        of {Math.ceil(pokemonsCount / perPage)}
+        of {getMaxPage()}
       </p>
       <RightCircleOutlined
         style={{

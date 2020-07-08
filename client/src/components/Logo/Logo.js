@@ -1,5 +1,5 @@
 import React from 'react'
-import pokeball from '../../pokeball.svg'
+import pokeball from '../../img/pokeball.svg'
 import styles from '../Logo/Logo.module.sass'
 
 export const Logo = () => {

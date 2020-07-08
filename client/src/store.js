@@ -5,8 +5,6 @@ export function createStore () {
     pokemonsList: [],
     perPage: 20,
     prevPage: 0,
-    pagStart: 0,
-    pagEnd: 20,
     actualPage: 1,
     loading: false,
     pokemonsCount: 0,
@@ -24,31 +22,19 @@ export function createStore () {
     },
     setActualPage (value) {
       this.actualPage = value
-      this.pagStart = 0
-      this.pagEnd = 20
     },
     setPerPage (value) {
       this.setActualPage(1)
       this.perPage = +value
     },
     pagLeft () {
-      this.pagStart = this.pagStart - this.perPage
-      this.pagEnd = this.pagEnd - this.perPage
       this.actualPage--
     },
     pagRight () {
-      this.pagStart = this.pagStart + this.perPage
-      this.pagEnd = this.pagEnd + this.perPage
       this.actualPage++
     },
     async getCount () {
       this.pokemonsCount = await fetchPokemonsCount().then(res => res.data)
-    },
-    searchByName (value) {
-      this.setActualPage(1)
-      return value.filter(a => {
-        return a.name.match(this.searchValue)
-      })
     },
     setSearchValue (value) {
       this.setActualPage(1)
