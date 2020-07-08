@@ -2,3 +2,6 @@ node_modules
 .env
 .idea
 client/node_modules
+client/build
+client/.idea
+client/.git
